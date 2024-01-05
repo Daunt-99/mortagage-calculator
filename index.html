@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mortgage Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    #calculator {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      color: #555;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #result {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="calculator">
+    <h2>Mortgage Calculator</h2>
+
+    <label for="houseCost">House Cost:</label>
+    <input type="number" id="houseCost" placeholder="Enter house cost">
+
+    <label for="interestRate">Interest Rate:</label>
+    <input type="number" id="interestRate" placeholder="Enter interest rate">
+
+    <label for="term">Term (years):</label>
+    <input type="number" id="term" placeholder="Enter term in years">
+
+    <button onclick="calculateMortgage()">Calculate</button>
+
+    <p id="result">Monthly Mortgage: </p>
+  </div>
+
+  <script>
+    function calculateMortgage() {
+      var houseCost = document.getElementById("houseCost").value;
+      var interestRate = document.getElementById("interestRate").value;
+      var term = document.getElementById("term").value;
+
+      var monthlyInterestRate = interestRate / 100 / 12;
+      var totalPayments = term * 12;
+
+      var mortgage = houseCost * (monthlyInterestRate * Math.pow(1 + monthlyInterestRate, totalPayments)) / (Math.pow(1 + monthlyInterestRate, totalPayments) - 1);
+
+      document.getElementById("result").innerHTML = "Monthly Mortgage: $" + mortgage.toFixed(2);
+    }
+  </script>
+</body>
+</html>
